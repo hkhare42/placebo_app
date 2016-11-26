@@ -1,2 +1,15 @@
-Label:
-    text: "Hello World"
+<MultiScreens>:
+
+    Screen:
+        name: 'home'
+        BoxLayout:
+            Button:
+                text: 'Placebo'
+                on_press: root.current = 'message'
+
+    Screen:
+        name: 'message'
+        BoxLayout:
+            Button:
+                text: 'Message'
+                on_press: root.current = 'home'
