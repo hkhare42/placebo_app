@@ -2,14 +2,20 @@
 
     Screen:
         name: 'home'
-        BoxLayout:
+        FloatLayout:
             Button:
-                text: 'Placebo'
+                text: 'Press Me!'
+                border: 30,30,30,30
+                background_normal: 'images/normal.png'
+                background_down: 'images/down.png'
                 on_press: root.current = 'message'
+                size_hint: (0.2, 0.2)
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
     Screen:
         name: 'message'
         BoxLayout:
             Button:
-                text: 'Message'
+                text: "[b]You're amazing![/b]"
+                markup: True
                 on_press: root.current = 'home'
