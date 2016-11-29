@@ -1,3 +1,5 @@
+#: import random random
+
 <MultiScreens>:
 
     Screen:
@@ -8,7 +10,8 @@
                 border: 30,30,30,30
                 background_normal: 'images/normal.png'
                 background_down: 'images/down.png'
-                on_press: root.current = 'message'
+                on_release: root.current = 'message'
+                on_press: b2.text = "[b]{}[/b]".format(random.choice(root.message_string))
                 size_hint: (0.2, 0.2)
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
@@ -16,6 +19,6 @@
         name: 'message'
         BoxLayout:
             Button:
-                text: "[b]You're amazing![/b]"
+                id: b2
                 markup: True
                 on_press: root.current = 'home'
