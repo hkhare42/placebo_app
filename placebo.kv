@@ -18,6 +18,7 @@
         FloatLayout:
             TrueButton:
                 text: 'Press Me!'
+                font_size: 20
                 border: 30,30,30,30
                 background_normal: 'images/normal.png'
                 background_down: 'images/down.png'
@@ -45,9 +46,13 @@
                 TrueButton:
                     text: 'YES'
                     background_color: C('#5AA155')
+                    background_normal: ''
+                    font_size: 30
                     on_release: root.send_resp(self.text)
 
                 TrueButton:
                     text: 'NO'
                     background_color: C('#E0585B')
+                    background_normal: ''
+                    font_size: 30
                     on_release: root.send_resp(self.text)
