@@ -1,24 +1,53 @@
 #: import random random
+#: import FadeTransition kivy.uix.screenmanager.FadeTransition
+#:import C kivy.utils.get_color_from_hex
+
+<TrueButton@Button>:
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
 
 <MultiScreens>:
+    transition: FadeTransition()
 
     Screen:
         name: 'home'
         FloatLayout:
-            Button:
+            TrueButton:
                 text: 'Press Me!'
                 border: 30,30,30,30
                 background_normal: 'images/normal.png'
                 background_down: 'images/down.png'
                 on_release: root.current = 'message'
                 on_press: b2.text = "[b]{}[/b]".format(random.choice(root.message_string))
-                size_hint: (0.2, 0.2)
+                size_hint: (0.4, 0.2)
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
     Screen:
         name: 'message'
+        
         BoxLayout:
-            Button:
+            orientation: 'vertical'
+            
+            Label:
                 id: b2
+                text_size: self.size
+                valign: 'middle'
+                halign: 'center'
                 markup: True
-                on_press: root.current = 'home'
+                    
+            BoxLayout:
+                size_hint: (1, 0.2)
+
+                TrueButton:
+                    text: 'YES'
+                    background_color: C('#5AA155')
+                    on_release: root.send_resp(self.text)
+
+                TrueButton:
+                    text: 'NO'
+                    background_color: C('#E0585B')
+                    on_release: root.send_resp(self.text)
