@@ -1,31 +1,47 @@
-#: import random random
 #: import FadeTransition kivy.uix.screenmanager.FadeTransition
 #:import C kivy.utils.get_color_from_hex
-
-<TrueButton@Button>:
-    canvas.before:
-        Color:
-            rgba: 0, 0, 0, 1
-        Rectangle:
-            pos: self.pos
-            size: self.size
 
 <MultiScreens>:
     transition: FadeTransition()
 
     Screen:
         name: 'home'
+
         FloatLayout:
-            TrueButton:
+            id: al
+            
+            TextInput:
+                id: ti
+                hint_text: 'Enter nickname to get started!'
+                on_focus: go.disable = False
+                multiline: False
+                pos_hint: {'x': 0, 'top': 1}
+                size_hint: (0.8, 0.1)
+                font_size: 15
+                padding: [10, 0.5 * (self.height - self.line_height)]
+
+            Button:
+                id: go
+                text: 'Go'
+                on_release: root.set_stage()
+                disable: True
+                pos_hint: {'right': 1, 'top': 1}
+                size_hint: (0.2, 0.1)
+
+        FloatLayout:
+            Button:
+                id: pm
                 text: 'Press Me!'
                 font_size: 20
                 border: 30,30,30,30
                 background_normal: 'images/normal.png'
                 background_down: 'images/down.png'
                 on_release: root.current = 'message'
-                on_press: b2.text = "[b]{}[/b]".format(random.choice(root.message_string))
+                on_press: b2.text = "[b]{}[/b]".format(root.message_dict[root.ranstr])
                 size_hint: (0.4, 0.2)
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                opacity: 0
+                disabled: True
 
     Screen:
         name: 'message'
@@ -39,18 +55,23 @@
                 valign: 'middle'
                 halign: 'center'
                 markup: True
+
+            Label:
+                text: 'Did that make you feel good?'
+                size_hint: (1, 0.1)
+                pos_hint: {'left': 0, 'bottom':0}
                     
             BoxLayout:
                 size_hint: (1, 0.2)
 
-                TrueButton:
+                Button:
                     text: 'YES'
                     background_color: C('#5AA155')
                     background_normal: ''
                     font_size: 30
                     on_release: root.send_resp(self.text)
 
-                TrueButton:
+                Button:
                     text: 'NO'
                     background_color: C('#E0585B')
                     background_normal: ''
