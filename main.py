@@ -1,5 +1,7 @@
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, SlideTransition
+from kivy.uix.floatlayout import FloatLayout
+from kivy.graphics import Color, Rectangle
 import codecs
 import requests
 import random
@@ -26,11 +28,23 @@ class MultiScreens(ScreenManager):
             direction=random.choice(['left','right','up','down'])
             )
         self.ranstr = random.choice(list(self.message_dict.keys()))
+        self.ids.cl.set_canvas()
 
     def set_stage(self):
         self.ids.pm.disabled = False
         self.ids.pm.opacity = 1
-        self.ids.al.pos_hint = {'x': 0, 'top': 1.2}
+        self.ids.al2.pos_hint = {'x': 0, 'top': 1.2}
+
+class ColLayout(FloatLayout):
+    def set_canvas(self):
+        saved = self.children[:]
+        self.clear_widgets()
+        self.canvas.clear()
+        with self.canvas.before:
+            Color(rgba= [random.random() for i in range(3)] + [0.3])
+            Rectangle(pos=self.pos, size=self.size)
+        for widget in saved:
+            self.add_widget(widget)
 
 class PlaceboApp(App):
     """ Main app class. """

@@ -7,24 +7,34 @@
 
         FloatLayout:
             id: al
-            
-            TextInput:
-                id: ti
-                hint_text: 'Enter nickname to get started!'
-                on_focus: go.disable = False
-                multiline: False
-                pos_hint: {'x': 0, 'top': 1}
-                size_hint: (0.8, 0.1)
-                font_size: '20sp'
-                padding: [10, 0.5 * (self.height - self.line_height)]
+            canvas.before:
+                Color:
+                    rgba: 1, 0.9, 0.9, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
 
-            Button:
-                id: go
-                text: 'Go'
-                on_release: root.set_stage()
-                disable: True
-                pos_hint: {'right': 1, 'top': 1}
-                size_hint: (0.2, 0.1)
+            BoxLayout:
+                id: al2
+                pos_hint: {'x': 0, 'top': 1}
+                size_hint: (1, 0.1)
+                                
+                TextInput:
+                    id: ti
+                    hint_text: 'Enter nickname to get started!'
+                    on_focus: go.disable = False
+                    multiline: False
+                    font_size: '20sp'
+                    size_hint: (0.8, 1)
+                    padding: [10, 0.5 * (self.height - self.line_height)]
+
+                Button:
+                    id: go
+                    text: 'Go'
+                    on_release: root.set_stage()
+                    disable: True
+                    pos_hint: {'right': 1, 'top': 1}
+                    size_hint: (0.2, 1)
 
         FloatLayout:
             Button:
@@ -44,38 +54,51 @@
     Screen:
         name: 'message'
         
-        BoxLayout:
+        ColLayout:
+            id: cl
+            canvas.before:
+                Color:
+                    rgba: 0.7, 1.0, 0.5, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
             orientation: 'vertical'
             
             Label:
                 id: b2
+                size_hint: (1, 0.8)
+                pos_hint: {'y': 0.2}
+                font_size: '20sp'
                 text_size: self.size
                 valign: 'middle'
                 halign: 'center'
                 markup: True
-                background_color: C('#FFFFFF')
                 color: C('#000000')
 
-            Label:
-                text: 'Did that make you feel good?'
-                size_hint: (1, 0.1)
-                pos_hint: {'left': 0, 'bottom':0}
-                background_color: C('#FFFFFF')
-                color: C('#000000')
-                    
             BoxLayout:
+                orientation: 'vertical'
                 size_hint: (1, 0.2)
+                y: cl.y
 
-                Button:
-                    text: 'YES'
-                    background_color: C('#5AA155')
-                    background_normal: ''
-                    font_size: '30sp'
-                    on_release: root.send_resp(self.text)
+                Label:
+                    text: 'Did that make you feel good?'
+                    size_hint: (1, 0.2)
+                    pos_hint: {'left': 0, 'bottom':0}
+                    color: C('#000000')
+                        
+                BoxLayout:
+                    size_hint: (1, 0.8)
 
-                Button:
-                    text: 'NO'
-                    background_color: C('#E0585B')
-                    background_normal: ''
-                    font_size: '30sp'
-                    on_release: root.send_resp(self.text)
+                    Button:
+                        text: 'YES'
+                        background_color: C('#5AA155')
+                        background_normal: ''
+                        font_size: '30sp'
+                        on_release: root.send_resp(self.text)
+
+                    Button:
+                        text: 'NO'
+                        background_color: C('#E0585B')
+                        background_normal: ''
+                        font_size: '30sp'
+                        on_release: root.send_resp(self.text)
