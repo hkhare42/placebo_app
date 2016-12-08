@@ -1,8 +1,6 @@
-#: import FadeTransition kivy.uix.screenmanager.FadeTransition
 #:import C kivy.utils.get_color_from_hex
 
 <MultiScreens>:
-    transition: FadeTransition()
 
     Screen:
         name: 'home'
@@ -17,7 +15,7 @@
                 multiline: False
                 pos_hint: {'x': 0, 'top': 1}
                 size_hint: (0.8, 0.1)
-                font_size: 15
+                font_size: '20sp'
                 padding: [10, 0.5 * (self.height - self.line_height)]
 
             Button:
@@ -32,7 +30,7 @@
             Button:
                 id: pm
                 text: 'Press Me!'
-                font_size: 20
+                font_size: '20sp'
                 border: 30,30,30,30
                 background_normal: 'images/normal.png'
                 background_down: 'images/down.png'
@@ -55,11 +53,15 @@
                 valign: 'middle'
                 halign: 'center'
                 markup: True
+                background_color: C('#FFFFFF')
+                color: C('#000000')
 
             Label:
                 text: 'Did that make you feel good?'
                 size_hint: (1, 0.1)
                 pos_hint: {'left': 0, 'bottom':0}
+                background_color: C('#FFFFFF')
+                color: C('#000000')
                     
             BoxLayout:
                 size_hint: (1, 0.2)
@@ -68,12 +70,12 @@
                     text: 'YES'
                     background_color: C('#5AA155')
                     background_normal: ''
-                    font_size: 30
+                    font_size: '30sp'
                     on_release: root.send_resp(self.text)
 
                 Button:
                     text: 'NO'
                     background_color: C('#E0585B')
                     background_normal: ''
-                    font_size: 30
+                    font_size: '30sp'
                     on_release: root.send_resp(self.text)
